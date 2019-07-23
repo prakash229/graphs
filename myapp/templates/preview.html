@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+<form action="hgram" method="post">
+{% csrf_token %}
+<div class="panel-body">
+ <input type="text" number_of_bins="bins"/>
+ <button type="submit">submit</button>
+</div>
+</form>
+</body>
+
+<head>
+  <title>Histogram</title>
+  <style>
+    body 
+    .histogram {
+      margin: 5px 0;
+    }
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="histogram.css">
+</head>
+<body>
+  <h1>Histogram</h1>
+  <form action="hgram" method="post">
+  {% csrf_token %}
+  <script src="build/build.js"></script>
+  <script>
+    var Histogram = require('histogram');
+    var h = new Histogram;
+    h.bins(0,1500);
+    h.size(650, 160);
+    h.add(rand(10, 1), { color: '#6abb8a' });
+    h.add(rand(20, 2), { color: '#f7e7a0' });
+    h.add(rand(5, .5), { color: '#81e7da' });
+    document.body.appendChild(h.render());
+    function rand(a, b) {
+      var d = [bins];
+      var n = 1000;
+      while (n--) {
+        d.push(a + Math.random() * (15 * b));
+      }
+      return d;
+    }
+  </script>
+</body>
+</html>
